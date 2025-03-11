@@ -2,7 +2,8 @@
 ///// I wanted to create a funny cat image with some text to go with it //////////////
 /// I will be incorporating some new features not gone over yet like alpha which essentialy fades out the color //////
 //or extracts the alpha value from a p5.color object/////////
-
+/// for code to run, you simply press the b or B key////
+//// and it will show the letters////
 //create a p5.iamge object
 let cutecat;
 let fadeAlpha = 0;
