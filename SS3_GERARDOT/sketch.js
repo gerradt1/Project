@@ -5,9 +5,10 @@
 //third Draft/////
 //okay to move this project forward I wanted to add some change of light in the led//
 //Main goal of this draft is to be able to have some sort of effect on the led panel//
-//lets do brightness//
+//lets do change of color set to a random point, were gonna do this aswell by adding some led panels aswell//
 */
-//lets set some constants we can use throughout the whole code
+//lets set some variable we can use throughout the whole code
+//is there a a way to group all of my rgb's so it can just be like one varibale to equate for all of them
 let ledbrightness = 150; // Initial brightness of the LED panel
 let x1 = 400;  //ellipse x1
 let y1 = 340;   //ellipse y1
@@ -16,9 +17,7 @@ let rgb4 = 0, rgb5 = 0, rgb6 = 0; //setting 2nd rectangle as black
 //they are listed this way in order to keep organization and not take up to much space even though this is still to much space
 
 function setup() {
-  //we will only be exeprimenting on one stage for 2nd project
   createCanvas(750, 750);
-  
 }
 function draw(){
   background(10, 10, 50);
@@ -28,17 +27,18 @@ function draw(){
   rect(x1 - 100, y1 - 70, 200, 20);
 
   //were gonna add an LED panel on top and below of ellipse
+  //this will be top of ellipse
+  //the fill, we will want black at first so we set it from the variables in the beginning
   fill(rgb1, rgb2, rgb3);
   rect(x1 - 100, y1 - 84, 200, 20);
 
+  //this one will be the led below the ellipse
+  //same we want an initial black screen
   fill(rgb4, rgb5, rgb6);
   rect(x1 - 100, y1 + 60, 200, 20);
 
-  //lets add some "LED" panels as circle in the lower center of each structure
-  //Lets shade them in something bright like yellow aswell
   fill(ledbrightness, ledbrightness * 0.8, 0); 
   noStroke();
-  //lets center out the ellipse
   ellipse(x1, y1, 200, 100);
   }
 //lets begin mouse click process
@@ -57,6 +57,7 @@ function mousePressed() {
   }
 
   //okay now our goal is to make the led rectangles have a random color effect when the key "c" is pressed
+  //we do this by setting the color inside of rectangle to be random each time c or C is clicked
   function keyPressed(){
     if (key === 'c' || key === 'C'){
       rgb1 = random(255);
