@@ -1,33 +1,62 @@
-/* ///// MIDTERM DRAFT///////
-////WARNING FLASHING WARNING !!!/////
-For my first midterm draft I wanted to continue on my stage design I started out with
-I still have yet to complete a menu and guide of some sort, that should be included for the future
-The main point however was to create a user experience with the code
-For this project I included lights and made the first initial ellipse lights aswell
-the lights currently are meant to represent a truss
-the lights should load in as black to represent they are "off"
-I incorparated a preset for the lights which is a flash effect(more will be coded in the future)
-however in order to use the preset the user must first turn on the lights by using the key '1' it should then turn red
-Again nothing will not happen if the lights are not on
-once red the user can press the 'r' key and the lights will flash red and blue
-I also incorparated a key press where the user can increase or decrease the frequency in the flashing lights
+/* ////////////                   ///////////
+////////////////MIDTERM FINAL////////////////
+For the final I wanted to showcase some of the things I learnt throughout the class
+Aswell as create something since when I first began
+I wanted to create controll between user and program which makes it interactive for the user aswell as dynamic at the same time
+Im invested more into the lighting part and wanted to make that a focus///
 */
 
-
-// set some variables
 let lightsOn = false; //when code runs lights are off, hence the black
 let flashTime = 1500; //sets the duration of the flashing effect, youll notice more on slower frequencies
 let initialFlash = 0; //this helps us know when the last flash occured to control the timing of it, helps us set timing of flashes
 let currentFlash = false; //this helps us know if the lights should be on or off in the flashing sequence, not static like the black
 let flashing = false;   // this actually initiates the flashing effect, hence its false meaning when code runs its set to false which should be off
+let sceneBegin = 1
 
 
 function setup() {
  
  createCanvas(1280, 720);
+ currentColor = color(255, 255, 255);   //current color will represent the random change in color for the draw menu
 }
- function draw(){
+ function draw()   
+ {
  background(10, 10, 50);
+
+ if (sceneBegin === 1)
+ {
+  drawMenu();
+ }
+ else if (sceneBegin === 2)
+ {
+  drawStage();
+ }
+}
+
+//We must set some variable before we can create the random colors in the letters that will show in the menu
+lastColorChange = 0;  
+colorChangeTiming = 100;  //we must state color change
+
+ function drawMenu()
+ {
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(50);
+  let waveEffect = millis() * 1.1;  //i called it wave effect to try and give it a wave effect
+
+  if (millis() - lastColorChange > colorChangeTiming) //this checks the time passed since the last color change
+{
+    lastColorChange = millis();
+    currentColor = color(random(100, 255), random(100, 255), random(100,255)); //this assigns the random color order to the current color variable and important to know it runs on a loop
+}
+  fill(currentColor);    
+  text("Welcome to the Light Show", width / 2, height / 3);
+  textSize(20);
+  text("press SPACE to start", width / 2, height - 100);
+  }
+
+ function drawStage()
+ {
  fill(200);
  strokeWeight(2);
  rect(100, 100, 350, 500);
@@ -48,9 +77,9 @@ function setup() {
  line(765, 377, 670, 327);
 
  line(125, 390, 240, 435);
- line(250, 435, 375, 390);
+ line(260, 435, 375, 390);
  line(860, 390, 980, 435);
- line(990, 435, 1105, 395);
+ line(1000, 435, 1115, 395);
 
 
  //This begins the flashing sequence
@@ -137,21 +166,45 @@ function setup() {
      let y = lerp(377, 327, i / 2);
      ellipse(x, y, 20, 20);
    }
-   nostroke();
+   noStroke();
    for (let i = 0; i < 3; i++)
    {
     let x = lerp(125, 240, i / 2);
     let y = lerp(390, 435, i / 2);
-    ellipse(x, y, 10, 10);
+    ellipse(x, y, 20, 20);
    }
-   nostroke();
+   noStroke();
    for (let i = 0; i < 3; i++)
    {
-    let x = lerp(250, 375, i / 2 );
+    let x = lerp(260, 375, i / 2 );
     let y = lerp(435, 390, i / 2);
-    ellipse = (x, y, 10, 10);
+    ellipse(x, y, 20, 20);
    } 
- }
+   noStroke();
+   for (let i = 0; i < 3; i++)
+   {
+    let x = lerp(860, 980, i / 2 );
+    let y = lerp(390, 435, i / 2);
+    ellipse(x, y, 20, 20);
+   } 
+   noStroke();
+   for (let i = 0; i < 3; i++)
+   {
+    let x = lerp(1000, 1115, i / 2 );
+    let y = lerp(435, 390, i / 2);
+    ellipse(x, y, 20, 20);
+   } 
+
+   fill(255);
+   textSize(15);
+   textAlign(LEFT, BOTTOM);
+   text("1: Turn on Lights", 10, height - 30);
+   text("r: Start Flashing Sequence", 10, height - 15);
+   text("Up Arrow: Increase Flash Frequency", 200, height - 30);
+   text("Down Arrow: Decrease Flash Frequency", 200, height - 15);
+   text("l: return to Menu", 500, height - 30);
+
+}
 // we want to make it that when the 1 key is pressed itll turn on the lights
 // pressing 'r' after the fact that the lights were turned on will initiate the flashing
 // it will not work if the lights are off
@@ -159,6 +212,10 @@ function setup() {
 //FLASH WARNING, if set to high
 function keyPressed()
 {
+  if (key === ' ')
+  {
+    sceneBegin = 2;
+  }
  if (key === '1')
  {
    lightsOn = !lightsOn;  //lights on were initallty set to false meaning off at the start of the code, but if the 1 key is pressed the lightsOn statement becomes true with the '!'
@@ -182,6 +239,9 @@ function keyPressed()
  {
    flashTime += 50;
  }
+ if (key === 'l')
+ {
+  sceneBegin = 1;
+ }
 }
-
 
