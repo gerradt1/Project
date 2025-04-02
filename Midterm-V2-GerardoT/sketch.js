@@ -1,9 +1,8 @@
 /* ////////////                   ///////////
 ////////////////MIDTERM FINAL 2////////////////
-For the final I wanted to showcase some of the things I learnt throughout the class
-Aswell as create something since when I first began
-I wanted to create controll between user and program which makes it interactive for the user aswell as dynamic at the same time
-Im invested more into the lighting part and wanted to make that a focus///
+For the 2nd midterm final I wanted to improve on the dynamic aspect of my project
+going through my classmates work, i think thats what my project was lacking so I did this instead 
+i implented an ellipse that keep moving within the ellipse to create a trippy effect maybe in the fufture i can cange the color it shows is.
 */
 
 let lightsOn = false; //when code runs lights are off, hence the black
@@ -124,23 +123,23 @@ colorChangeTiming = 100;  //we must state color change
  ellipse(263, 340, 200, 100);
  ellipse(630, 400, 200, 100);
  ellipse(990, 340, 200, 100);
-
+// beginning of ellipse growing logic (ripple effect)
  let rippleMaxWidth = 200;
  let rippleMaxHeigth = 100;
-
+//we essentially like the flashing lights want this to be in effect only when the lights are on and flashing is off
  if (rippleOn && lightsOn && !flashing)
  {
   noFill();
   stroke(255);
   strokeWeight(2);
-
+//over here we are declaring where we want it to take place and the size
   if(rippleSize < rippleMaxWidth && rippleSize < rippleMaxHeigth)
   {
   ellipse(263, 340, rippleSize, rippleSize);
   ellipse(630, 400, rippleSize, rippleSize);
   ellipse(990, 340, rippleSize, rippleSize);
   }
-
+//we are setting its limits here and telling it when to reset as to not overline the actualy ellipse
   rippleSize += 2;
 
   if (rippleSize > rippleMaxWidth || rippleSize > rippleMaxHeigth)
